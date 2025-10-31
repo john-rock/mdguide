@@ -1,0 +1,98 @@
+---
+title: Getting Started
+description: Learn the basics of using our guide system
+author: WriterX Team
+date: 2025-10-31
+tags: [beginner, tutorial]
+published: true
+---
+
+## Introduction
+
+Welcome to the getting started guide! This guide will walk you through the basics of using our platform.
+
+In this step, you'll learn about:
+- The core concepts
+- How to navigate the interface
+- Basic terminology
+
+Let's get started!
+
+## Installation
+
+First, you'll need to install the necessary dependencies. Run the following command in your terminal:
+
+```bash
+npm install writerx
+```
+
+Once installed, you can verify the installation by checking the version:
+
+```bash
+writerx --version
+```
+
+You should see the version number printed to the console.
+
+## Configuration
+
+Now that you have everything installed, let's configure your environment.
+
+Create a new file called `writerx.config.js` in your project root:
+
+```javascript
+module.exports = {
+  theme: 'default',
+  plugins: [],
+  settings: {
+    autoSave: true,
+    darkMode: false
+  }
+};
+```
+
+This configuration file allows you to customize the behavior of your application.
+
+## Your First Project
+
+Let's create your first project! Follow these steps:
+
+1. Create a new directory for your project
+2. Initialize the project with `writerx init`
+3. Start the development server
+
+Here's what the initialization looks like:
+
+```bash
+mkdir my-first-project
+cd my-first-project
+writerx init
+```
+
+The CLI will guide you through some setup questions. Accept the defaults for now.
+
+## Running the Development Server
+
+To see your project in action, start the development server:
+
+```bash
+writerx dev
+```
+
+Open your browser and navigate to `http://localhost:3000`. You should see your project running!
+
+The development server includes:
+- Hot module replacement
+- Error overlay
+- Fast refresh
+
+## Next Steps
+
+Congratulations! You've completed the getting started guide.
+
+Here are some recommended next steps:
+- Explore the advanced features guide
+- Check out the API documentation
+- Join our community forum
+
+Happy coding!
