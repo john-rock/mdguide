@@ -15,7 +15,7 @@ export function GuideContent({ guide }: GuideContentProps) {
       <GuideSidebar steps={guide.steps} title={guide.metadata.title} />
 
       {/* Main content */}
-      <main className="flex-1 lg:ml-72">
+      <main className="flex-1">
         <div className="mx-auto max-w-4xl px-6 py-12 sm:px-8 lg:px-12">
           {/* Guide header */}
           <header className="mb-12 border-b border-zinc-200 pb-8 dark:border-zinc-800">
