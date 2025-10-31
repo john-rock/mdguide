@@ -1,8 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WriterX
+
+A modern, interactive documentation and guide platform built with Next.js. WriterX helps you create beautiful, searchable, step-by-step guides with progress tracking and an intuitive user experience.
+
+## Features
+
+- **Step-by-Step Guides** - Break down complex topics into manageable, trackable steps
+- **Full-Text Search** - Fast, client-side search powered by FlexSearch
+- **Progress Tracking** - Automatically track user progress through guides with local storage
+- **Markdown Support** - Write guides in Markdown with GitHub Flavored Markdown support
+- **Syntax Highlighting** - Beautiful code highlighting with rehype-highlight
+- **Responsive Design** - Mobile-first design built with Tailwind CSS
+- **Dark Mode** - Full dark mode support
+- **Type-Safe** - Built with TypeScript for better developer experience
+
+## Tech Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org/) with App Router
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Content**: MDX with [react-markdown](https://github.com/remarkjs/react-markdown)
+- **Search**: [FlexSearch](https://github.com/nextapps-de/flexsearch)
+- **Language**: TypeScript
+- **Rendering**: React 19
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20.x or later
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/john-rock/writerx.git
+cd writerx
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +56,104 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+writerx/
+├── app/
+│   ├── api/           # API routes
+│   ├── components/    # React components
+│   │   └── guides/    # Guide-specific components
+│   ├── guides/        # Guides pages and routes
+│   ├── hooks/         # Custom React hooks
+│   ├── lib/           # Utility functions and libraries
+│   │   └── guides/    # Guide parsing, search, and loading
+│   ├── types/         # TypeScript type definitions
+│   ├── layout.tsx     # Root layout
+│   └── page.tsx       # Home page
+├── public/            # Static assets
+└── guides/            # Guide content (Markdown files)
+```
 
-## Learn More
+## Creating Guides
 
-To learn more about Next.js, take a look at the following resources:
+Guides are written in Markdown format with YAML frontmatter. Here's an example:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```markdown
+---
+title: Getting Started
+description: Learn the basics of WriterX
+author: Your Name
+date: 2025-10-31
+tags: [beginner, tutorial]
+published: true
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Introduction
 
-## Deploy on Vercel
+Your guide content here...
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Step 1: First Step
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Step content...
+
+## Step 2: Second Step
+
+More content...
+```
+
+## Development
+
+### Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build for production
+- `npm run start` - Start the production server
+- `npm run lint` - Run ESLint
+
+### Key Components
+
+- **GuideContent** - Renders guide content with step navigation
+- **SearchBar** - Provides search functionality across all guides
+- **GuideSidebar** - Navigation sidebar with table of contents
+- **StepSection** - Individual step rendering with progress tracking
+
+## Roadmap
+
+This project is a work in progress. Planned features include:
+
+- [ ] User authentication and personalized dashboards
+- [ ] Guide authoring interface
+- [ ] Community contributions and ratings
+- [ ] Export guides to PDF
+- [ ] Multi-language support
+- [ ] Analytics and insights
+
+## Contributing
+
+Contributions are welcome! This project is still in active development.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please ensure your code follows the existing style and includes appropriate tests.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+Built with:
+- [Next.js](https://nextjs.org/) - The React Framework
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [MDX](https://mdxjs.com/) - Markdown for the component era
+- [FlexSearch](https://github.com/nextapps-de/flexsearch) - Full-text search library
+
