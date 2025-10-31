@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { GuideSidebar } from "./GuideSidebar";
 import { StepSection } from "./StepSection";
+import { useGuideProgress } from "@/app/hooks/useGuideProgress";
 import type { Guide } from "@/app/types/guide";
 
 interface GuideContentProps {
@@ -10,31 +10,14 @@ interface GuideContentProps {
 }
 
 export function GuideContent({ guide }: GuideContentProps) {
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const { currentStepIndex, setCurrentStepIndex, mounted } = useGuideProgress(
+    guide.slug,
+    guide.steps.length
+  );
 
   const currentStep = guide.steps[currentStepIndex];
   const isFirstStep = currentStepIndex === 0;
   const isLastStep = currentStepIndex === guide.steps.length - 1;
-
-  // Initialize step from URL hash on mount
-  useEffect(() => {
-    setMounted(true);
-    const hash = window.location.hash.slice(1);
-    if (hash && hash.startsWith('step-')) {
-      const stepNumber = parseInt(hash.replace('step-', ''), 10);
-      if (!isNaN(stepNumber) && stepNumber >= 1 && stepNumber <= guide.steps.length) {
-        setCurrentStepIndex(stepNumber - 1);
-      }
-    }
-  }, [guide.steps]);
-
-  // Update URL hash when step changes
-  useEffect(() => {
-    if (mounted) {
-      window.history.replaceState(null, "", `#step-${currentStepIndex + 1}`);
-    }
-  }, [currentStepIndex, mounted]);
 
   // Don't render until mounted to prevent flash
   if (!mounted) {
