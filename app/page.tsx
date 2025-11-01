@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { SearchBar } from "@/app/components/guides/SearchBar";
+import { CmdkSearchBar } from "@/app/components/guides/CmdkSearchBar";
 import { TagFilter } from "@/app/components/guides/TagFilter";
 import { Footer } from "@/app/components/Footer";
 import { search as searchGuides } from "@/app/lib/guides/search";
@@ -75,7 +75,7 @@ export default function HomePage() {
 
         {/* Search bar */}
         <div className="mb-8">
-          <SearchBar onSearch={handleSearch} />
+          <CmdkSearchBar onSearch={handleSearch} />
         </div>
 
         {/* Main content with sidebar */}
