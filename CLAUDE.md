@@ -22,20 +22,22 @@ The site is configured via `app/config/site.ts`, which exports a `siteConfig` ob
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'mdguide',                    // Site name (used in metadata)
-  description: 'Site description...',  // Site description (used in metadata)
-  guideIndex: {
-    title: 'Guides',                   // Main heading on guide index/homepage
-    description: 'Step-by-step...',    // Subheader on guide index/homepage
+  metadata: {
+    title: 'mdguide',                 // Site title (browser tab, SEO metadata)
+    description: 'Site description...' // Site description (SEO metadata)
+  },
+  homepage: {
+    title: 'Guides',                  // Main heading on homepage
+    description: 'Step-by-step...',   // Subheader on homepage
   },
 };
 ```
 
-**Customization**: To customize your site's branding and guide index page:
+**Customization**: To customize your site's branding and homepage:
 1. Edit `app/config/site.ts`
-2. Update the `name` field to change the site title (appears in browser tab/metadata)
-3. Update `guideIndex.title` to change the main heading on the homepage
-4. Update `guideIndex.description` to change the subheader text
+2. Update `metadata.title` and `metadata.description` to change SEO metadata and browser tab title
+3. Update `homepage.title` to change the main heading on the homepage
+4. Update `homepage.description` to change the subheader text
 
 **Type definitions**: Located in `app/types/site.ts`
 
@@ -141,7 +143,7 @@ Priority: URL hash takes precedence over localStorage on page load.
 ### Homepage Configuration
 - The homepage (`app/page.tsx`) displays the guide index
 - The guide index shows all published guides with search and tag filtering
-- The page title and description are controlled by `siteConfig.guideIndex` in `app/config/site.ts`
+- The page title and description are controlled by `siteConfig.homepage` in `app/config/site.ts`
 
 ## Tech Stack Notes
 

@@ -1,10 +1,14 @@
-export interface GuideIndexConfig {
+export interface SiteMetadata {
+  title: string;
+  description: string;
+}
+
+export interface HomepageConfig {
   title: string;
   description: string;
 }
 
 export interface SiteConfig {
-  name: string;
-  description: string;
-  guideIndex: GuideIndexConfig;
+  metadata: SiteMetadata;
+  homepage: HomepageConfig;
 }

@@ -119,9 +119,11 @@ Then it shows a summary and asks for confirmation before applying changes.
 1. **app/config/site.ts**
    ```typescript
    export const siteConfig: SiteConfig = {
-     name: 'User Input',
-     description: 'User Input',
-     guideIndex: {
+     metadata: {
+       title: 'User Input',
+       description: 'User Input',
+     },
+     homepage: {
        title: 'User Input',
        description: 'User Input',
      },

@@ -77,9 +77,11 @@ function updateSiteConfig(config) {
   let content = `import { SiteConfig } from '@/app/types/site';
 
 export const siteConfig: SiteConfig = {
-  name: '${config.siteName}',
-  description: '${config.description}',
-  guideIndex: {
+  metadata: {
+    title: '${config.siteName}',
+    description: '${config.description}',
+  },
+  homepage: {
     title: '${config.guideIndexTitle}',
     description: '${config.guideIndexDescription}',
   },

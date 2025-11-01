@@ -68,9 +68,11 @@ Edit `app/config/site.ts`:
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'Your Site Name',
-  description: 'Your site description',
-  guideIndex: {
+  metadata: {
+    title: 'Your Site Name',
+    description: 'Your site description',
+  },
+  homepage: {
     title: 'Your Homepage Heading',
     description: 'Your homepage subheader text',
   },
@@ -128,10 +130,10 @@ git commit -m "Initial commit from mdguide template"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Site name - appears in browser tabs, page titles, and metadata |
-| `description` | string | Site description - used for SEO and social media previews |
-| `guideIndex.title` | string | Main heading displayed on the homepage/guide index |
-| `guideIndex.description` | string | Subheader text on the homepage/guide index |
+| `metadata.title` | string | Site title - appears in browser tabs and SEO metadata |
+| `metadata.description` | string | Site description - used for SEO and social media previews |
+| `homepage.title` | string | Main heading displayed on the homepage |
+| `homepage.description` | string | Subheader text on the homepage |
 
 ### Guide Frontmatter
 

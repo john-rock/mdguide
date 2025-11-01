@@ -22,49 +22,55 @@ The configuration file exports a `siteConfig` object with the following structur
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'mdguide',                    // Site name (used in metadata)
-  description: 'Site description...',  // Site description (used in metadata)
-  guideIndex: {
-    title: 'Guides',                   // Main heading on guide index/homepage
-    description: 'Step-by-step...',    // Subheader on guide index/homepage
+  metadata: {
+    title: 'mdguide',                 // Site title (browser tab, SEO metadata)
+    description: 'Site description...', // Site description (SEO metadata)
+  },
+  homepage: {
+    title: 'Guides',                  // Main heading on homepage
+    description: 'Step-by-step...',   // Subheader on homepage
   },
 };
 ```
 
 Each field serves a specific purpose:
-- `name` - Appears in browser tabs, page titles, and SEO metadata
-- `description` - Used for SEO and social media previews
-- `guideIndex.title` - The main heading displayed on your homepage
-- `guideIndex.description` - The subheader text on your homepage
+- `metadata.title` - Appears in browser tabs, page titles, and SEO metadata
+- `metadata.description` - Used for SEO and social media previews
+- `homepage.title` - The main heading displayed on your homepage
+- `homepage.description` - The subheader text on your homepage
 
-## Update the Site Name
+## Update the Site Title
 
-Find the `name` field in the config object and change it to your desired site name:
+Find the `metadata.title` field in the config object and change it to your desired site name:
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'My Documentation Site',  // Changed from 'mdguide'
-  description: '...',
-  guideIndex: {
+  metadata: {
+    title: 'My Documentation Site',  // Changed from 'mdguide'
+    description: '...',
+  },
+  homepage: {
     // ...
   },
 };
 ```
 
-This name will appear in:
+This title will appear in:
 - Browser tab titles (e.g., "Guide Title | My Documentation Site")
 - Search engine results
 - Social media link previews
 
 ## Update the Site Description
 
-Modify the `description` field to describe your site:
+Modify the `metadata.description` field to describe your site:
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'My Documentation Site',
-  description: 'Comprehensive guides and tutorials for our platform',  // Updated description
-  guideIndex: {
+  metadata: {
+    title: 'My Documentation Site',
+    description: 'Comprehensive guides and tutorials for our platform',  // Updated description
+  },
+  homepage: {
     // ...
   },
 };
@@ -74,13 +80,15 @@ This description is used for SEO purposes and appears in search engine results a
 
 ## Customize the Homepage Heading
 
-Change the `guideIndex.title` to set the main heading on your homepage:
+Change the `homepage.title` to set the main heading on your homepage:
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'My Documentation Site',
-  description: 'Comprehensive guides and tutorials for our platform',
-  guideIndex: {
+  metadata: {
+    title: 'My Documentation Site',
+    description: 'Comprehensive guides and tutorials for our platform',
+  },
+  homepage: {
     title: 'Documentation & Guides',  // Changed from 'Guides'
     description: 'Step-by-step...',
   },
@@ -91,13 +99,15 @@ This is the large heading visitors see when they first land on your site.
 
 ## Customize the Homepage Subheader
 
-Update the `guideIndex.description` to change the subheader text:
+Update the `homepage.description` to change the subheader text:
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'My Documentation Site',
-  description: 'Comprehensive guides and tutorials for our platform',
-  guideIndex: {
+  metadata: {
+    title: 'My Documentation Site',
+    description: 'Comprehensive guides and tutorials for our platform',
+  },
+  homepage: {
     title: 'Documentation & Guides',
     description: 'Learn how to use our platform with detailed, step-by-step tutorials',  // Updated subheader
   },
