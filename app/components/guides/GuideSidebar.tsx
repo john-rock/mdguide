@@ -60,7 +60,7 @@ export function GuideSidebar({ steps, title, currentStepIndex, onStepChange }: G
             </h2>
           </div>
 
-          <nav className="space-y-1">
+          <nav className="flex-1 space-y-1">
             {steps.map((step, index) => (
               <button
                 key={step.id}
@@ -92,6 +92,15 @@ export function GuideSidebar({ steps, title, currentStepIndex, onStepChange }: G
               </button>
             ))}
           </nav>
+
+          <div className="mt-8 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+            <a
+              href="/guides"
+              className="flex items-center gap-2 text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
+            >
+              ← Back to all guides
+            </a>
+          </div>
         </div>
       </aside>
 

@@ -148,18 +148,6 @@ export function GuideContent({ guide }: GuideContentProps) {
               </svg>
             </button>
           </div>
-
-          {/* Footer navigation */}
-          <footer className="mt-8 border-t border-zinc-200 pt-8 dark:border-zinc-800">
-            <div className="flex items-center justify-between">
-              <a
-                href="/guides"
-                className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-              >
-                ← Back to all guides
-              </a>
-            </div>
-          </footer>
         </div>
       </main>
     </div>
