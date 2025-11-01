@@ -45,7 +45,7 @@ export const siteConfig: SiteConfig = {
 
 The guide system is the heart of this application. Here's how it works:
 
-1. **Content Storage**: Guides live in `app/guides/(content)/[guide-name]/page.mdx`
+1. **Content Storage**: Guides live in `app/guides/[guide-name]/page.mdx`
    - Each guide is a directory with a `page.mdx` file
    - MDX files have YAML frontmatter with metadata
    - Each `## heading` in the MDX becomes a navigable "step"
@@ -99,7 +99,7 @@ Priority: URL hash takes precedence over localStorage on page load.
 
 ## Creating New Guides
 
-1. Create directory: `app/guides/(content)/[slug-name]/`
+1. Create directory: `app/guides/[slug-name]/`
 2. Create file: `page.mdx` with frontmatter:
    ```yaml
    ---
@@ -134,8 +134,7 @@ Priority: URL hash takes precedence over localStorage on page load.
 - Custom component mapping available in StepSection.tsx
 
 ### Route Structure
-- `app/guides/(content)/` is a route group (parentheses mean no URL segment)
-- Guide content files are stored in `app/guides/(content)/[guide-name]/page.mdx`
+- Guide content files are stored in `app/guides/[guide-name]/page.mdx`
 - Individual guides are accessible at `/{slug}` (e.g., `/getting-started`)
 - The dynamic route handler is located at `app/[slug]/page.tsx`
 

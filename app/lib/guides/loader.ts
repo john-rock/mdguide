@@ -3,7 +3,7 @@ import path from "path";
 import { parseGuideContent, parseGuideMetadata } from "./parser";
 import type { Guide, GuideListItem } from "@/app/types/guide";
 
-const GUIDES_DIRECTORY = path.join(process.cwd(), "app/guides/(content)");
+const GUIDES_DIRECTORY = path.join(process.cwd(), "app/guides");
 
 /**
  * Get all guide slugs from the filesystem
