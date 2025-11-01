@@ -177,7 +177,7 @@ Returns a list of all published guides with metadata:
     "metadata": {
       "title": "Getting Started",
       "description": "Learn the basics...",
-      "author": "WriterX Team",
+      "author": "mdguide Team",
       "date": "2025-10-31",
       "tags": ["beginner", "tutorial"],
       "published": true

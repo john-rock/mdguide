@@ -1,10 +1,11 @@
 ---
 title: Setup Your Site Name
 description: Learn how to customize your site's name and branding using the configuration file
-author: WriterX Team
+author: mdguide Team
 date: 2025-11-01
 tags: [configuration, getting-started, customization]
 published: true
+isExample: true
 ---
 
 This guide will walk you through customizing your site's name and branding by editing the site configuration file.
@@ -21,7 +22,7 @@ The configuration file exports a `siteConfig` object with the following structur
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'WriterX',                    // Site name (used in metadata)
+  name: 'mdguide',                    // Site name (used in metadata)
   description: 'Site description...',  // Site description (used in metadata)
   guideIndex: {
     title: 'Guides',                   // Main heading on guide index/homepage
@@ -42,7 +43,7 @@ Find the `name` field in the config object and change it to your desired site na
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'My Documentation Site',  // Changed from 'WriterX'
+  name: 'My Documentation Site',  // Changed from 'mdguide'
   description: '...',
   guideIndex: {
     // ...

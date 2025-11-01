@@ -1,12 +1,13 @@
 {
-  "name": "writerx",
+  "name": "mdguide",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "setup": "node scripts/setup.js"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

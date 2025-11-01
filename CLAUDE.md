@@ -14,7 +14,7 @@ npm run lint             # Run ESLint
 
 ## Project Overview
 
-WriterX is a Next.js 16 application that provides a modern documentation/guide platform with step-by-step guides, full-text search, and progress tracking. It uses the App Router architecture with React 19 and Tailwind CSS 4.
+mdguide is a Next.js 16 application that provides a modern documentation/guide platform with step-by-step guides, full-text search, and progress tracking. It uses the App Router architecture with React 19 and Tailwind CSS 4.
 
 ## Site Configuration
 
@@ -22,7 +22,7 @@ The site is configured via `app/config/site.ts`, which exports a `siteConfig` ob
 
 ```typescript
 export const siteConfig: SiteConfig = {
-  name: 'WriterX',                    // Site name (used in metadata)
+  name: 'mdguide',                    // Site name (used in metadata)
   description: 'Site description...',  // Site description (used in metadata)
   guideIndex: {
     title: 'Guides',                   // Main heading on guide index/homepage
@@ -93,7 +93,7 @@ Located in `app/types/guide.ts`:
 
 The `useGuideProgress` hook implements a dual-storage system:
 1. URL hash (`#step-N`) - For shareability and bookmarking
-2. localStorage (`writerx-guide-progress`) - Persists progress across sessions
+2. localStorage (`mdguide-guide-progress`) - Persists progress across sessions
 
 Priority: URL hash takes precedence over localStorage on page load.
 

@@ -1,17 +1,18 @@
 ---
-title: Creating Guides in WriterX
-description: Learn how to create step-by-step guides for the WriterX platform, from basic setup to advanced features
-author: WriterX Team
+title: Creating Guides in mdguide
+description: Learn how to create step-by-step guides for the mdguide platform, from basic setup to advanced features
+author: mdguide Team
 date: 2025-10-31
 tags: [tutorial, guides, documentation, getting-started]
 published: true
+isExample: true
 ---
 
-Welcome to this guide on creating guides! This meta-guide will teach you how to create your own step-by-step documentation using WriterX's guide platform.
+Welcome to this guide on creating guides! This meta-guide will teach you how to create your own step-by-step documentation using mdguide's guide platform.
 
 ## Understanding the Guide Structure
 
-Every guide in WriterX lives in its own directory under `app/guides/(content)/`. Each guide is a single MDX file with YAML frontmatter and markdown content.
+Every guide in mdguide lives in its own directory under `app/guides/(content)/`. Each guide is a single MDX file with YAML frontmatter and markdown content.
 
 The basic structure looks like this:
 ```
@@ -83,7 +84,7 @@ Supported languages include JavaScript, TypeScript, Python, bash, JSON, YAML, an
 
 ## Using Markdown Features
 
-WriterX supports GitHub Flavored Markdown (GFM). Here are some useful features:
+mdguide supports GitHub Flavored Markdown (GFM). Here are some useful features:
 
 **Lists:**
 - Unordered lists use `-`, `*`, or `+`
@@ -152,7 +153,7 @@ If the build fails, check the console for errors. Common issues:
 
 ## Advanced: How the System Works
 
-Behind the scenes, WriterX processes your guide through several stages:
+Behind the scenes, mdguide processes your guide through several stages:
 
 **Content Processing Pipeline:**
 1. `app/lib/guides/loader.ts` - Reads your MDX file from the filesystem

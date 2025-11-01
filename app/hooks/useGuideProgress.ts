@@ -6,7 +6,7 @@ interface GuideProgress {
   [guideSlug: string]: number; // Maps guide slug to current step index
 }
 
-const STORAGE_KEY = "writerx-guide-progress";
+const STORAGE_KEY = "mdguide-guide-progress";
 
 export function useGuideProgress(guideSlug: string, totalSteps: number) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);

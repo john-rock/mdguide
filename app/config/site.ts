@@ -1,7 +1,7 @@
 import { SiteConfig } from '@/app/types/site';
 
 export const siteConfig: SiteConfig = {
-  name: 'WriterX',
+  name: 'mdguide',
   description: 'A modern documentation and guide platform with step-by-step guides, full-text search, and progress tracking.',
   guideIndex: {
     title: 'Guides',

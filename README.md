@@ -1,159 +1,197 @@
-# WriterX
+# mdguide
 
-A modern, interactive documentation and guide platform built with Next.js. WriterX helps you create beautiful, searchable, step-by-step guides with progress tracking and an intuitive user experience.
+A modern, interactive documentation and guide platform built with Next.js. mdguide helps you create beautiful, searchable, step-by-step guides with progress tracking and an intuitive user experience.
 
-## Features
+**Perfect for creating documentation sites, tutorials, courses, and step-by-step guides.**
 
-- **Step-by-Step Guides** - Break down complex topics into manageable, trackable steps
-- **Full-Text Search** - Fast, client-side search powered by FlexSearch
-- **Progress Tracking** - Automatically track user progress through guides with local storage
-- **Markdown Support** - Write guides in Markdown with GitHub Flavored Markdown support
-- **Syntax Highlighting** - Beautiful code highlighting with rehype-highlight
-- **Responsive Design** - Mobile-first design built with Tailwind CSS
-- **Dark Mode** - Full dark mode support
-- **Type-Safe** - Built with TypeScript for better developer experience
+## ✨ Features
 
-## Tech Stack
+- 📚 **Step-by-Step Guides** - Break down complex topics into manageable, trackable steps
+- 🔍 **Full-Text Search** - Fast, client-side search powered by FlexSearch
+- 📊 **Progress Tracking** - Automatically track user progress through guides with local storage
+- ✍️ **MDX Support** - Write guides in Markdown with full MDX support
+- 🎨 **Syntax Highlighting** - Beautiful code highlighting out of the box
+- 📱 **Responsive Design** - Mobile-first design built with Tailwind CSS 4
+- 🌙 **Dark Mode** - Full dark mode support
+- 🔒 **Type-Safe** - Built with TypeScript for better developer experience
+- ⚡ **Fast & Modern** - Built on Next.js 16, React 19, and Tailwind CSS 4
+
+## 🚀 Quick Start
+
+### Using This Template
+
+The fastest way to get started:
+
+1. **Click "Use this template"** button on GitHub to create your own repository
+
+2. **Clone your new repository:**
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+   cd YOUR-REPO-NAME
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+4. **Run the setup wizard:**
+   ```bash
+   npm run setup
+   ```
+
+   This interactive wizard will:
+   - Configure your site name and branding
+   - Update package information
+   - Optionally delete example guides
+   - Optionally create a starter guide
+   - Optionally reinitialize git with clean history
+
+5. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open [http://localhost:3000](http://localhost:3000)** to see your site!
+
+### Manual Setup
+
+Prefer to set up manually? See the [SETUP.md](SETUP.md) guide for detailed instructions.
+
+## 📖 Documentation
+
+- **[SETUP.md](SETUP.md)** - Complete setup and configuration guide
+- **[CLAUDE.md](CLAUDE.md)** - Detailed architecture and development guide
+- **Example Guides** - Check `app/guides/` for example content (marked with `isExample: true`)
+
+## 🛠️ Tech Stack
 
 - **Framework**: [Next.js 16](https://nextjs.org/) with App Router
+- **UI**: [React 19](https://react.dev/)
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
 - **Content**: MDX with [react-markdown](https://github.com/remarkjs/react-markdown)
 - **Search**: [FlexSearch](https://github.com/nextapps-de/flexsearch)
-- **Language**: TypeScript
-- **Rendering**: React 19
+- **Language**: [TypeScript 5](https://www.typescriptlang.org/)
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 20.x or later
-- npm, yarn, pnpm, or bun
-
-### Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/john-rock/writerx.git
-cd writerx
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
-
-3. Run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-writerx/
+mdguide/
 ├── app/
-│   ├── api/           # API routes
-│   ├── components/    # React components
-│   │   └── guides/    # Guide-specific components
-│   ├── guides/        # Guides pages and routes
-│   ├── hooks/         # Custom React hooks
-│   ├── lib/           # Utility functions and libraries
-│   │   └── guides/    # Guide parsing, search, and loading
-│   ├── types/         # TypeScript type definitions
-│   ├── layout.tsx     # Root layout
-│   └── page.tsx       # Home page
-├── public/            # Static assets
-└── guides/            # Guide content (Markdown files)
+│   ├── [slug]/           # Dynamic route for guides
+│   ├── api/guides/       # Search API endpoint
+│   ├── components/       # React components
+│   ├── config/
+│   │   └── site.ts       # 👈 Main configuration file
+│   ├── guides/           # 👈 Your guide content (MDX files)
+│   ├── hooks/            # React hooks
+│   ├── lib/guides/       # Guide processing logic
+│   └── types/            # TypeScript types
+├── scripts/
+│   └── setup.js          # Interactive setup wizard
+├── SETUP.md              # Setup documentation
+└── package.json
 ```
 
-## Creating Guides
+## 📝 Creating Guides
 
-Guides are written in Markdown format with YAML frontmatter. Here's an example:
+Create a new guide by adding a directory in `app/guides/` with a `page.mdx` file:
 
-```markdown
+**Example: `app/guides/my-guide/page.mdx`**
+
+```mdx
 ---
 title: Getting Started
-description: Learn the basics of WriterX
+description: Learn the basics of mdguide
 author: Your Name
 date: 2025-10-31
 tags: [beginner, tutorial]
 published: true
 ---
 
-# Introduction
-
-Your guide content here...
+Introduction to your guide...
 
 ## Step 1: First Step
 
-Step content...
+Step content here. Each `##` heading creates a new step.
 
 ## Step 2: Second Step
 
-More content...
+More content with code examples:
+
+```javascript
+console.log("Hello, mdguide!");
 ```
 
-## Development
+## Step 3: Conclusion
 
-### Available Scripts
+Wrap up your guide!
+```
 
-- `npm run dev` - Start the development server
-- `npm run build` - Build for production
-- `npm run start` - Start the production server
-- `npm run lint` - Run ESLint
+After creating your guide, it will be available at `http://localhost:3000/my-guide`
 
-### Key Components
+See [SETUP.md](SETUP.md) for detailed guide creation instructions.
 
-- **GuideContent** - Renders guide content with step navigation
-- **SearchBar** - Provides search functionality across all guides
-- **GuideSidebar** - Navigation sidebar with table of contents
-- **StepSection** - Individual step rendering with progress tracking
+## 🛠️ Development
 
-## Roadmap
+### Available Commands
 
-This project is a work in progress. Planned features include:
+```bash
+npm run dev     # Start development server
+npm run build   # Build for production
+npm run start   # Start production server
+npm run lint    # Run ESLint
+npm run setup   # Run interactive setup wizard
+```
 
-- [ ] User authentication and personalized dashboards
-- [ ] Guide authoring interface
-- [ ] Community contributions and ratings
+### Key Files to Customize
+
+- **[app/config/site.ts](app/config/site.ts)** - Site name, description, branding
+- **[app/guides/](app/guides/)** - Your guide content (MDX files)
+- **[app/components/](app/components/)** - UI components for customization
+- **[package.json](package.json)** - Project metadata
+
+## 🗺️ Roadmap
+
+Planned features for future releases:
+
+- [ ] CLI generator (`npx create-mdguide`)
+- [ ] Guide templates and categories
 - [ ] Export guides to PDF
 - [ ] Multi-language support
+- [ ] Advanced search filters
 - [ ] Analytics and insights
+- [ ] Community themes and plugins
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome! This project is still in active development.
+Contributions are welcome! Whether it's bug fixes, new features, documentation improvements, or feedback:
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-Please ensure your code follows the existing style and includes appropriate tests.
+Please ensure your code follows the existing style and includes appropriate documentation.
 
-## License
+## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
-Built with:
+mdguide is built with amazing open-source tools:
+
 - [Next.js](https://nextjs.org/) - The React Framework
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [MDX](https://mdxjs.com/) - Markdown for the component era
 - [FlexSearch](https://github.com/nextapps-de/flexsearch) - Full-text search library
+- [gray-matter](https://github.com/jonschlinkert/gray-matter) - YAML frontmatter parser
+
+---
+
+**Built with ❤️ using mdguide**
+
+[⭐ Star on GitHub](https://github.com/john-rock/mdguide) • [📖 Documentation](SETUP.md) • [🐛 Report Bug](https://github.com/john-rock/mdguide/issues) • [💡 Request Feature](https://github.com/john-rock/mdguide/issues)
 
