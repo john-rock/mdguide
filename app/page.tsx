@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { SearchBar } from "@/app/components/guides/SearchBar";
 import { TagFilter } from "@/app/components/guides/TagFilter";
+import { Footer } from "@/app/components/Footer";
 import { search as searchGuides } from "@/app/lib/guides/search";
 import type { GuideListItem, SearchResult } from "@/app/types/guide";
 import { siteConfig } from "@/app/config/site";
@@ -60,8 +61,8 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 lg:px-12">
+    <div className="flex min-h-screen flex-col bg-white dark:bg-black">
+      <div className="mx-auto flex-1 w-full max-w-7xl px-6 py-12 sm:px-8 lg:px-12">
         {/* Header */}
         <header className="mb-12">
           <h1 className="mb-4 text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl">
@@ -136,6 +137,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
