@@ -63,8 +63,8 @@ export function SearchBar({ onSearch }: SearchBarProps) {
 
   const handleResultClick = (result: SearchResult) => {
     const url = result.stepId
-      ? `/guides/${result.slug}#${result.stepId}`
-      : `/guides/${result.slug}`;
+      ? `/${result.slug}#${result.stepId}`
+      : `/${result.slug}`;
     router.push(url);
     setQuery("");
     setResults([]);
