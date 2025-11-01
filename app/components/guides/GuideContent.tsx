@@ -10,7 +10,7 @@ interface GuideContentProps {
 }
 
 export function GuideContent({ guide }: GuideContentProps) {
-  const { currentStepIndex, setCurrentStepIndex, mounted } = useGuideProgress(
+  const { currentStepIndex, setCurrentStepIndex, highestCompletedStep, mounted } = useGuideProgress(
     guide.slug,
     guide.steps.length
   );
@@ -25,7 +25,10 @@ export function GuideContent({ guide }: GuideContentProps) {
   }
 
   const goToNextStep = () => {
-    if (!isLastStep) {
+    if (isLastStep) {
+      // On last step, navigate to homepage
+      window.location.href = "/";
+    } else {
       setCurrentStepIndex(currentStepIndex + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -45,6 +48,7 @@ export function GuideContent({ guide }: GuideContentProps) {
         steps={guide.steps}
         title={guide.metadata.title}
         currentStepIndex={currentStepIndex}
+        highestCompletedStep={highestCompletedStep}
         onStepChange={setCurrentStepIndex}
       />
 
@@ -124,17 +128,9 @@ export function GuideContent({ guide }: GuideContentProps) {
 
             <button
               onClick={goToNextStep}
-              disabled={isLastStep}
-              className={`
-                flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors
-                ${
-                  isLastStep
-                    ? "cursor-not-allowed text-zinc-400 dark:text-zinc-600"
-                    : "text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50"
-                }
-              `}
+              className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50"
             >
-              Next
+              {isLastStep ? "Finish" : "Next"}
               <svg
                 className="h-4 w-4"
                 fill="none"
@@ -144,7 +140,11 @@ export function GuideContent({ guide }: GuideContentProps) {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path d="M9 5l7 7-7 7" />
+                {isLastStep ? (
+                  <path d="M5 13l4 4L19 7" />
+                ) : (
+                  <path d="M9 5l7 7-7 7" />
+                )}
               </svg>
             </button>
           </div>
