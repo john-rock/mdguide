@@ -8,7 +8,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import type { SearchResult, GuideListItem } from "@/app/types/guide";
 
 interface CmdkSearchBarProps {
-  onSearch: (query: string) => SearchResult[];
+  onSearch: (query: string) => Promise<SearchResult[]>;
 }
 
 export function CmdkSearchBar({ onSearch }: CmdkSearchBarProps) {
@@ -62,8 +62,9 @@ export function CmdkSearchBar({ onSearch }: CmdkSearchBarProps) {
   // Perform search whenever query changes
   useEffect(() => {
     if (query.trim()) {
-      const searchResults = onSearch(query);
-      setResults(searchResults);
+      onSearch(query).then((searchResults) => {
+        setResults(searchResults);
+      });
       setSelectedTag(null); // Clear tag selection when searching
     } else {
       setResults([]);
@@ -71,8 +72,8 @@ export function CmdkSearchBar({ onSearch }: CmdkSearchBarProps) {
   }, [query, onSearch]);
 
   const handleSelect = (result: SearchResult) => {
-    const url = result.stepId
-      ? `/${result.slug}#${result.stepId}`
+    const url = result.stepIndex !== undefined
+      ? `/${result.slug}#step-${result.stepIndex + 1}`
       : `/${result.slug}`;
     router.push(url);
     setOpen(false);

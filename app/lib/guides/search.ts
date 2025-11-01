@@ -6,7 +6,7 @@ const searchIndex = new FlexSearch.Document({
   document: {
     id: "id",
     index: ["title", "content"],
-    store: ["slug", "title", "description", "stepId", "stepTitle"],
+    store: ["slug", "title", "description", "stepId", "stepIndex", "stepTitle"],
   },
   tokenize: "forward",
   cache: true,
@@ -31,13 +31,14 @@ export function buildSearchIndex(guides: Guide[]): void {
     });
 
     // Index each step
-    guide.steps.forEach((step) => {
+    guide.steps.forEach((step, index) => {
       searchIndex.add({
         id: `${guide.slug}-${step.id}`,
         slug: guide.slug,
         title: guide.metadata.title,
         description: guide.metadata.description,
         stepId: step.id,
+        stepIndex: index,
         stepTitle: step.title,
         content: `${step.title} ${step.content}`,
       });
@@ -62,17 +63,20 @@ export function search(query: string, limit = 10): SearchResult[] {
   const seen = new Set<string>();
 
   // Flatten and deduplicate results
+  // FlexSearch returns results in format: [{field: string, result: [{id: string, doc: object}]}]
   results.forEach((result: any) => {
     result.result.forEach((item: any) => {
-      const key = `${item.slug}-${item.stepId || ""}`;
+      const doc = item.doc || item; // Access the document from the enriched result
+      const key = `${doc.slug}-${doc.stepId || ""}`;
       if (!seen.has(key)) {
         seen.add(key);
         searchResults.push({
-          slug: item.slug,
-          title: item.title,
-          description: item.description,
-          stepId: item.stepId,
-          stepTitle: item.stepTitle,
+          slug: doc.slug,
+          title: doc.title,
+          description: doc.description,
+          stepId: doc.stepId,
+          stepIndex: doc.stepIndex,
+          stepTitle: doc.stepTitle,
           score: 1, // FlexSearch doesn't provide scores
         });
       }

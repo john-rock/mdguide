@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
-import { getAllGuides, getAllGuidesWithContent } from "@/app/lib/guides/loader";
-import { buildSearchIndex } from "@/app/lib/guides/search";
+import { getAllGuides } from "@/app/lib/guides/loader";
 
 export async function GET() {
   try {
-    // Get all guides
+    // Get all guides (metadata only, no content)
     const guides = getAllGuides();
-
-    // Build search index on first request
-    const guidesWithContent = getAllGuidesWithContent();
-    buildSearchIndex(guidesWithContent);
 
     return NextResponse.json(guides);
   } catch (error) {

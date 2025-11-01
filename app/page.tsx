@@ -5,7 +5,6 @@ import Link from "next/link";
 import { CmdkSearchBar } from "@/app/components/guides/CmdkSearchBar";
 import { TagFilter } from "@/app/components/guides/TagFilter";
 import { Footer } from "@/app/components/Footer";
-import { search as searchGuides } from "@/app/lib/guides/search";
 import type { GuideListItem, SearchResult } from "@/app/types/guide";
 import { siteConfig } from "@/app/config/site";
 
@@ -29,8 +28,17 @@ export default function HomePage() {
       });
   }, []);
 
-  const handleSearch = (query: string): SearchResult[] => {
-    return searchGuides(query);
+  const handleSearch = async (query: string): Promise<SearchResult[]> => {
+    if (!query.trim()) return [];
+
+    try {
+      const response = await fetch(`/api/guides/search?q=${encodeURIComponent(query)}`);
+      if (!response.ok) return [];
+      return await response.json();
+    } catch (error) {
+      console.error("Search error:", error);
+      return [];
+    }
   };
 
   // Extract all unique tags from guides

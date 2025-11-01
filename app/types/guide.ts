@@ -31,6 +31,7 @@ export interface SearchResult {
   title: string;
   description: string;
   stepId?: string;
+  stepIndex?: number;
   stepTitle?: string;
   score: number;
 }
