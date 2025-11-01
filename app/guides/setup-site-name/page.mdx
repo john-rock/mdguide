@@ -1,0 +1,130 @@
+---
+title: Setup Your Site Name
+description: Learn how to customize your site's name and branding using the configuration file
+author: WriterX Team
+date: 2025-11-01
+tags: [configuration, getting-started, customization]
+published: true
+---
+
+This guide will walk you through customizing your site's name and branding by editing the site configuration file.
+
+## Locate the Configuration File
+
+The site configuration is stored in `app/config/site.ts`. This file contains all the settings that control your site's metadata and branding.
+
+Open the file in your code editor to get started.
+
+## Understanding the Config Structure
+
+The configuration file exports a `siteConfig` object with the following structure:
+
+```typescript
+export const siteConfig: SiteConfig = {
+  name: 'WriterX',                    // Site name (used in metadata)
+  description: 'Site description...',  // Site description (used in metadata)
+  guideIndex: {
+    title: 'Guides',                   // Main heading on guide index/homepage
+    description: 'Step-by-step...',    // Subheader on guide index/homepage
+  },
+};
+```
+
+Each field serves a specific purpose:
+- `name` - Appears in browser tabs, page titles, and SEO metadata
+- `description` - Used for SEO and social media previews
+- `guideIndex.title` - The main heading displayed on your homepage
+- `guideIndex.description` - The subheader text on your homepage
+
+## Update the Site Name
+
+Find the `name` field in the config object and change it to your desired site name:
+
+```typescript
+export const siteConfig: SiteConfig = {
+  name: 'My Documentation Site',  // Changed from 'WriterX'
+  description: '...',
+  guideIndex: {
+    // ...
+  },
+};
+```
+
+This name will appear in:
+- Browser tab titles (e.g., "Guide Title | My Documentation Site")
+- Search engine results
+- Social media link previews
+
+## Update the Site Description
+
+Modify the `description` field to describe your site:
+
+```typescript
+export const siteConfig: SiteConfig = {
+  name: 'My Documentation Site',
+  description: 'Comprehensive guides and tutorials for our platform',  // Updated description
+  guideIndex: {
+    // ...
+  },
+};
+```
+
+This description is used for SEO purposes and appears in search engine results and social media previews.
+
+## Customize the Homepage Heading
+
+Change the `guideIndex.title` to set the main heading on your homepage:
+
+```typescript
+export const siteConfig: SiteConfig = {
+  name: 'My Documentation Site',
+  description: 'Comprehensive guides and tutorials for our platform',
+  guideIndex: {
+    title: 'Documentation & Guides',  // Changed from 'Guides'
+    description: 'Step-by-step...',
+  },
+};
+```
+
+This is the large heading visitors see when they first land on your site.
+
+## Customize the Homepage Subheader
+
+Update the `guideIndex.description` to change the subheader text:
+
+```typescript
+export const siteConfig: SiteConfig = {
+  name: 'My Documentation Site',
+  description: 'Comprehensive guides and tutorials for our platform',
+  guideIndex: {
+    title: 'Documentation & Guides',
+    description: 'Learn how to use our platform with detailed, step-by-step tutorials',  // Updated subheader
+  },
+};
+```
+
+This appears directly below the main heading on your homepage.
+
+## Save and Test Your Changes
+
+Save the `app/config/site.ts` file and restart your development server:
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000` to see your changes. Check:
+- The browser tab title
+- The homepage heading and subheader
+- The page title on individual guide pages
+
+## Build for Production
+
+Once you're happy with your configuration, build your site for production:
+
+```bash
+npm run build
+npm run start
+```
+
+Your customized site name and branding will now be applied across all pages and metadata.
