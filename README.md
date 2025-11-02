@@ -4,6 +4,8 @@ A modern, interactive documentation and guide platform built with Next.js. mdgui
 
 **Perfect for creating documentation sites, tutorials, courses, and step-by-step guides.**
 
+![mdguide Homepage](public/readme_homepage.png)
+
 ## ✨ Features
 
 - 📚 **Step-by-Step Guides** - Break down complex topics into manageable, trackable steps
