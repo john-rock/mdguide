@@ -1,0 +1,112 @@
+---
+title: Setting Up llms.txt
+description: Learn how to configure and use the llms.txt feature to make your guides accessible to AI and LLM tools
+author: mdguide Team
+date: 2025-11-02
+tags: [configuration, llms, ai]
+published: true
+---
+
+mdguide includes built-in support for generating an `llms.txt` file from your guides. This makes your documentation easily discoverable and consumable by AI assistants, LLMs, and other automated tools.
+
+The `llms.txt` file is a standardized format (similar to `robots.txt`) that allows AI and LLM tools to easily understand and index your documentation. When enabled, mdguide automatically generates this file from all your published guides with titles, descriptions, metadata, tags, and step content.
+
+## Configure llms.txt in Your Site
+
+Open `app/config/site.ts` and add the `llmsTxt` configuration:
+
+```typescript
+export const siteConfig: SiteConfig = {
+  metadata: {
+    title: 'Your Site Name',
+    description: 'Your site description',
+  },
+  homepage: {
+    title: 'Guides',
+    description: 'Your homepage description',
+  },
+  footer: {
+    text: 'Built with mdguide',
+  },
+  llmsTxt: {
+    enabled: true,              // Enable llms.txt generation
+    includeStepContent: true,   // Include full step content
+  },
+};
+```
+
+**Configuration Options:**
+- **`enabled`**: Set to `true` to enable, `false` to disable
+- **`includeStepContent`**: Set to `true` for full step content, `false` for step titles only
+
+**Content Options:**
+- `includeStepContent: true` - Comprehensive file with all guide text, code examples, and instructions (best for AI assistants)
+- `includeStepContent: false` - Concise file with guide structure and step titles only (smaller file size)
+
+## Build and Access Your llms.txt File
+
+Build your site to generate the llms.txt file:
+
+```bash
+npm run build
+```
+
+Once built, your llms.txt file is accessible at:
+- Development: `http://localhost:3000/llms.txt`
+- Production: `https://yourdomain.com/llms.txt`
+
+The file is statically generated at build time and includes:
+- Site metadata and description
+- Table of contents with all published guides
+- Guide titles, descriptions, authors, dates, and tags
+- Step-by-step content (based on your `includeStepContent` setting)
+
+A footer link automatically appears when the feature is enabled, making it easy to share with AI tools.
+
+## Test Your Configuration
+
+Start the dev server and verify everything works:
+
+```bash
+npm run dev
+```
+
+Then check:
+1. Visit `http://localhost:3000/llms.txt` to view the generated file
+2. Look for the "llms.txt" link in the footer at the bottom of any page
+3. Verify all your published guides are included with correct metadata
+
+If you don't see the footer link, restart your dev server and clear your browser cache.
+
+## Use Cases for llms.txt
+
+The llms.txt feature enables several powerful integrations:
+
+**AI & LLM Integration:**
+- AI assistants can read your entire documentation in one file
+- Enables better context-aware answers about your content
+- Powers documentation search via AI chat interfaces
+
+**Developer Tools:**
+- IDE extensions can access your documentation
+- CLI tools can fetch guide content programmatically
+- Automated documentation tools can parse your guides
+
+**Accessibility:**
+- Single file contains all documentation for offline use
+- Simple, human and machine-readable format
+- Easy to share with AI tools and documentation services
+
+## Disable the Feature
+
+To disable llms.txt, set `enabled: false` in your config:
+
+```typescript
+llmsTxt: {
+  enabled: false,  // Disables the feature
+}
+```
+
+When disabled, the `/llms.txt` route returns a 404 and the footer link is hidden.
+
+Learn more about the [llms.txt specification](https://llmstxt.org/).
