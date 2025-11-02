@@ -77,16 +77,17 @@ export default async function Image({ params }: Props) {
           style={{
             display: "flex",
             flexDirection: "column",
+            maxWidth: "1040px",
           }}
         >
           <div
             style={{
               fontSize: 72,
               fontWeight: "bold",
-              lineHeight: 1.2,
+              lineHeight: 1.1,
               maxWidth: "1040px",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
+              display: "flex",
+              alignItems: "center",
             }}
           >
             {guide.metadata.title}

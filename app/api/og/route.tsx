@@ -90,16 +90,17 @@ export async function GET(request: NextRequest) {
               display: "flex",
               flexDirection: "column",
               gap: stepTitle ? "24px" : "0",
+              maxWidth: "1040px",
             }}
           >
             <div
               style={{
                 fontSize: stepTitle ? 56 : 72,
                 fontWeight: "bold",
-                lineHeight: 1.2,
+                lineHeight: 1.1,
                 maxWidth: "1040px",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
+                display: "flex",
+                alignItems: "center",
               }}
             >
               {guide.metadata.title}
@@ -110,10 +111,10 @@ export async function GET(request: NextRequest) {
                   fontSize: 36,
                   opacity: 0.9,
                   fontWeight: "500",
-                  lineHeight: 1.3,
+                  lineHeight: 1.2,
                   maxWidth: "1040px",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
+                  display: "flex",
+                  alignItems: "center",
                 }}
               >
                 {stepTitle}
