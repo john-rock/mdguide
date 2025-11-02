@@ -100,27 +100,26 @@ Located in `app/types/guide.ts`:
 mdguide automatically generates dynamic Open Graph images for social media sharing:
 
 **Implementation**:
-- Default OG images: `app/[slug]/opengraph-image.tsx` generates images for each guide
-- Step-specific OG images: `app/api/og/route.tsx` generates images with step information
-- Client-side updates: `DynamicOgMeta.tsx` updates meta tags when URL hash changes
+- `app/[slug]/opengraph-image.tsx` - Generates OG images for each guide
+- Next.js automatically includes these images in page metadata
+- Images are statically generated at build time
 
 **Image Features**:
-- Shows guide title prominently
-- Displays site name from `siteConfig.metadata.title`
-- Shows author and step count metadata
-- For step-specific URLs: displays step title in smaller text below guide title
-- Uses gradient background (slate to dark)
+- Shows guide title prominently (72px font)
+- Displays site name from `siteConfig.metadata.title` at top
+- Shows author and step count metadata at bottom
+- Uses gradient background (slate to dark: #1e293b to #0f172a)
 - Size: 1200x630px (optimized for social platforms)
 
 **Usage**:
-- Guide page: `/{slug}` automatically uses opengraph-image
-- Step-specific sharing: URL format `/{slug}#step-N` dynamically updates OG image
-- Direct API access: `/api/og?slug={slug}&step={N}` for custom implementations
+- Automatically applied when sharing guide URLs: `/{slug}`
+- Social media platforms (Twitter, Facebook, LinkedIn, etc.) will automatically fetch the image
+- No additional configuration needed
 
 **Customization**:
-- Edit `app/[slug]/opengraph-image.tsx` to change default guide image design
-- Edit `app/api/og/route.tsx` to change step-specific image design
-- Modify gradient colors, fonts, layout as needed
+- Edit `app/[slug]/opengraph-image.tsx` to change the design
+- Modify gradient colors, fonts, layout, spacing as needed
+- Add your logo or branding elements
 
 ### Progress Tracking System
 

@@ -3,7 +3,6 @@
 import { GuideSidebar } from "./GuideSidebar";
 import { StepSection } from "./StepSection";
 import { CmdkSearchBar } from "./CmdkSearchBar";
-import { DynamicOgMeta } from "./DynamicOgMeta";
 import { useGuideProgress } from "@/app/hooks/useGuideProgress";
 import type { Guide, SearchResult } from "@/app/types/guide";
 
@@ -73,13 +72,9 @@ export function GuideContent({ guide }: GuideContentProps) {
   };
 
   return (
-    <>
-      {/* Dynamic OG meta tags for step-specific sharing */}
-      <DynamicOgMeta guideSlug={guide.slug} />
-
-      <div className="flex min-h-screen bg-white dark:bg-black">
-        {/* Sidebar */}
-        <GuideSidebar
+    <div className="flex min-h-screen bg-white dark:bg-black">
+      {/* Sidebar */}
+      <GuideSidebar
         steps={guide.steps}
         title={guide.metadata.title}
         currentStepIndex={currentStepIndex}
@@ -196,7 +191,6 @@ export function GuideContent({ guide }: GuideContentProps) {
           </div>
         </div>
       </main>
-      </div>
-    </>
+    </div>
   );
 }
