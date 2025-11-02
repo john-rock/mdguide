@@ -92,7 +92,7 @@ export function GuideContent({ guide }: GuideContentProps) {
       />
 
       {/* Main content */}
-      <main className="flex-1">
+      <main className="flex-1 overflow-hidden">
         <div className="mx-auto max-w-4xl px-6 py-12 sm:px-8 lg:px-12">
 
           {/* Guide header - only show on first step */}

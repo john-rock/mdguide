@@ -15,7 +15,7 @@ export function StepSection({ step }: StepSectionProps) {
       <h2 className="mb-6 text-3xl font-bold text-zinc-900 dark:text-zinc-50">
         {step.title}
       </h2>
-      <div className="prose prose-zinc dark:prose-invert max-w-none">
+      <div className="prose prose-zinc dark:prose-invert max-w-none overflow-hidden">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight]}

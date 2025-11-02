@@ -46,7 +46,7 @@ export function GuideSidebar({ steps, title, currentStepIndex, highestCompletedS
       {/* Mobile toggle button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="fixed bottom-4 right-4 z-50 rounded-full bg-black p-4 text-white shadow-lg lg:hidden"
+        className="fixed top-4 right-4 z-50 rounded-full p-4 text-zinc-900 shadow-lg dark:text-zinc-50 lg:hidden"
         aria-label="Toggle navigation"
       >
         <svg
