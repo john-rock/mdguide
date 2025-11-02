@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
 import { getGuideBySlug } from "@/app/lib/guides/loader";
 import { siteConfig } from "@/app/config/site";
+import fs from "fs/promises";
+import path from "path";
 
 export const runtime = "nodejs";
 export const alt = "Guide Preview";
@@ -20,6 +22,14 @@ export default async function Image({ params }: Props) {
   // Load the guide
   const guide = getGuideBySlug(slug);
 
+  // Load Geist fonts
+  const geistBold = await fs.readFile(
+    path.join(process.cwd(), "public/fonts/Geist-Bold.ttf")
+  );
+  const geistMedium = await fs.readFile(
+    path.join(process.cwd(), "public/fonts/Geist-Medium.ttf")
+  );
+
   if (!guide) {
     // Return a fallback image
     return new ImageResponse(
@@ -34,7 +44,8 @@ export default async function Image({ params }: Props) {
             alignItems: "center",
             justifyContent: "center",
             color: "white",
-            fontWeight: "bold",
+            fontWeight: 700,
+            fontFamily: "Geist",
           }}
         >
           Guide Not Found
@@ -42,6 +53,14 @@ export default async function Image({ params }: Props) {
       ),
       {
         ...size,
+        fonts: [
+          {
+            name: "Geist",
+            data: geistBold,
+            weight: 700,
+            style: "normal",
+          },
+        ],
       }
     );
   }
@@ -59,6 +78,7 @@ export default async function Image({ params }: Props) {
           justifyContent: "space-between",
           padding: "80px",
           color: "white",
+          fontFamily: "Geist",
         }}
       >
         {/* Top section with site name */}
@@ -66,7 +86,7 @@ export default async function Image({ params }: Props) {
           style={{
             fontSize: 32,
             opacity: 0.8,
-            fontWeight: "500",
+            fontWeight: 500,
           }}
         >
           {siteConfig.metadata.title}
@@ -85,7 +105,7 @@ export default async function Image({ params }: Props) {
           <div
             style={{
               fontSize: 72,
-              fontWeight: "bold",
+              fontWeight: 700,
               lineHeight: 1.15,
               maxWidth: "1040px",
               display: "flex",
@@ -118,6 +138,20 @@ export default async function Image({ params }: Props) {
     ),
     {
       ...size,
+      fonts: [
+        {
+          name: "Geist",
+          data: geistBold,
+          weight: 700,
+          style: "normal",
+        },
+        {
+          name: "Geist",
+          data: geistMedium,
+          weight: 500,
+          style: "normal",
+        },
+      ],
     }
   );
 }

@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/app/config/site";
+import fs from "fs/promises";
+import path from "path";
 
 export const runtime = "nodejs";
 export const alt = `${siteConfig.metadata.title} - ${siteConfig.metadata.description}`;
@@ -10,6 +12,14 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
+  // Load Geist fonts
+  const geistBold = await fs.readFile(
+    path.join(process.cwd(), "public/fonts/Geist-Bold.ttf")
+  );
+  const geistMedium = await fs.readFile(
+    path.join(process.cwd(), "public/fonts/Geist-Medium.ttf")
+  );
+
   return new ImageResponse(
     (
       <div
@@ -23,13 +33,14 @@ export default async function Image() {
           justifyContent: "center",
           padding: "80px",
           color: "white",
+          fontFamily: "Geist",
         }}
       >
         {/* Main title */}
         <div
           style={{
             fontSize: 96,
-            fontWeight: "bold",
+            fontWeight: 700,
             lineHeight: 1.1,
             maxWidth: "1040px",
             marginBottom: "32px",
@@ -43,7 +54,7 @@ export default async function Image() {
           style={{
             fontSize: 36,
             opacity: 0.9,
-            fontWeight: "500",
+            fontWeight: 500,
             lineHeight: 1.3,
             maxWidth: "900px",
           }}
@@ -54,6 +65,20 @@ export default async function Image() {
     ),
     {
       ...size,
+      fonts: [
+        {
+          name: "Geist",
+          data: geistBold,
+          weight: 700,
+          style: "normal",
+        },
+        {
+          name: "Geist",
+          data: geistMedium,
+          weight: 500,
+          style: "normal",
+        },
+      ],
     }
   );
 }
