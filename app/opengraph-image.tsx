@@ -19,7 +19,7 @@ export default async function Image() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "center",
           padding: "80px",
           color: "white",
@@ -32,7 +32,6 @@ export default async function Image() {
             fontWeight: "bold",
             lineHeight: 1.1,
             maxWidth: "1040px",
-            textAlign: "center",
             marginBottom: "32px",
           }}
         >
@@ -47,7 +46,6 @@ export default async function Image() {
             fontWeight: "500",
             lineHeight: 1.3,
             maxWidth: "900px",
-            textAlign: "center",
           }}
         >
           {siteConfig.metadata.description}
