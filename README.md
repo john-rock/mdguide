@@ -11,6 +11,7 @@ A modern, interactive documentation and guide platform built with Next.js. mdgui
 - 📊 **Progress Tracking** - Automatically track user progress through guides with local storage
 - ✍️ **MDX Support** - Write guides in Markdown with full MDX support
 - 🎨 **Syntax Highlighting** - Beautiful code highlighting out of the box
+- 🖼️ **Dynamic OG Images** - Automatic Open Graph images for social media sharing
 - 📱 **Responsive Design** - Mobile-first design built with Tailwind CSS 4
 - 🌙 **Dark Mode** - Full dark mode support
 - 🤖 **LLM-Friendly** - Automatic llms.txt generation for AI/LLM consumption
@@ -163,6 +164,51 @@ When enabled, your llms.txt file will be available at `http://localhost:3000/llm
 - Step-by-step content (if enabled)
 - Table of contents with anchor links
 
+## 🖼️ Dynamic Open Graph Images
+
+mdguide automatically generates beautiful Open Graph images for social media sharing.
+
+### Features
+
+- **Automatic Generation**: Homepage and every guide get custom OG images at build time
+- **Social Media Optimized**: Perfect 1200x630px size for Twitter, Facebook, LinkedIn, etc.
+- **Dynamic Content**: Shows guide title, site name, author, and step count
+- **Beautiful Design**: Gradient background with professional typography
+- **Custom Image Support**: Option to use your own custom image for the homepage
+- **Zero Configuration**: Works out of the box with no setup required
+
+### How It Works
+
+When you share a URL, social media platforms automatically fetch the custom OG image:
+- **Homepage** (`/`): Shows site title and description
+- **Guide pages** (`/guide-name`): Shows guide title, author, and metadata
+
+### Using a Custom Homepage Image
+
+Want to use your own custom OG image for the homepage?
+
+1. Place your image in the `public/` directory (e.g., `public/og-image.png`)
+2. Update **[app/config/site.ts](app/config/site.ts)**:
+   ```typescript
+   openGraph: {
+     homepageImage: '/og-image.png',
+   }
+   ```
+
+Guide pages will continue using dynamically generated images.
+
+### Customization
+
+Want to customize the generated images?
+- **Homepage**: Edit **[app/opengraph-image.tsx](app/opengraph-image.tsx)**
+- **Guide pages**: Edit **[app/[slug]/opengraph-image.tsx](app/[slug]/opengraph-image.tsx)**
+
+You can:
+- Change colors and gradients
+- Adjust typography and layout
+- Add your logo or branding
+- Modify the visual style
+
 ## 🛠️ Development
 
 ### Available Commands
@@ -186,8 +232,6 @@ npm run setup   # Run interactive setup wizard
 
 Planned features for future releases:
 
-- [ ] CLI generator (`npx create-mdguide`)
-- [ ] Guide templates and categories
 - [ ] Export guides to PDF
 - [ ] Multi-language support
 - [ ] Advanced search filters

@@ -26,10 +26,23 @@ export async function generateMetadata({
     };
   }
 
+  // The opengraph-image route will automatically be used by Next.js
+  // It will receive the slug from the URL params
   return {
     title: guide.metadata.title,
     description: guide.metadata.description,
     authors: guide.metadata.author ? [{ name: guide.metadata.author }] : [],
+    openGraph: {
+      title: guide.metadata.title,
+      description: guide.metadata.description,
+      type: "article",
+      authors: guide.metadata.author ? [guide.metadata.author] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: guide.metadata.title,
+      description: guide.metadata.description,
+    },
   };
 }
 

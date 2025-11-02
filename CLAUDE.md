@@ -95,6 +95,53 @@ Located in `app/types/guide.ts`:
 3. Uses FlexSearch to search guide titles, descriptions, and step content
 4. Returns results with both guide-level and step-level matches
 
+### Open Graph Images
+
+mdguide automatically generates dynamic Open Graph images for social media sharing:
+
+**Implementation**:
+- `app/opengraph-image.tsx` - Generates OG image for homepage
+- `app/[slug]/opengraph-image.tsx` - Generates OG images for each guide
+- Next.js automatically includes these images in page metadata
+- Images are statically generated at build time
+
+**Image Features**:
+- Homepage: Shows site title (96px) and description centered
+- Guide pages: Shows guide title (72px), site name, author, and step count
+- Uses gradient background (slate to dark: #1e293b to #0f172a)
+- Size: 1200x630px (optimized for social platforms)
+
+**Configuration** (`app/config/site.ts`):
+```typescript
+openGraph: {
+  // Leave undefined to use auto-generated OG image
+  // Or set to a custom image path like '/og-image.png'
+  homepageImage: undefined,
+}
+```
+
+**Using Custom Images**:
+1. Place your custom OG image in the `public/` directory (e.g., `public/og-image.png`)
+2. Update `app/config/site.ts`:
+   ```typescript
+   openGraph: {
+     homepageImage: '/og-image.png',
+   }
+   ```
+3. The custom image will be used for the homepage; guide pages still use dynamic images
+
+**Usage**:
+- Homepage: Automatically applied when sharing the root URL
+- Guide pages: Automatically applied when sharing guide URLs: `/{slug}`
+- Social media platforms (Twitter, Facebook, LinkedIn, etc.) will automatically fetch the images
+- No additional configuration needed for dynamic images
+
+**Customization**:
+- Edit `app/opengraph-image.tsx` to change homepage design
+- Edit `app/[slug]/opengraph-image.tsx` to change guide page design
+- Modify gradient colors, fonts, layout, spacing as needed
+- Add your logo or branding elements
+
 ### Progress Tracking System
 
 The `useGuideProgress` hook implements a dual-storage system:
