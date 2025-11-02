@@ -92,7 +92,7 @@ export default async function Image({ params }: Props) {
           {siteConfig.metadata.title}
         </div>
 
-        {/* Middle section with guide title */}
+        {/* Middle section with guide title and description */}
         <div
           style={{
             display: "flex",
@@ -100,6 +100,7 @@ export default async function Image({ params }: Props) {
             maxWidth: "1040px",
             flex: 1,
             justifyContent: "center",
+            gap: "24px",
           }}
         >
           <div
@@ -114,6 +115,21 @@ export default async function Image({ params }: Props) {
           >
             {guide.metadata.title}
           </div>
+          {guide.metadata.description && (
+            <div
+              style={{
+                fontSize: 32,
+                fontWeight: 500,
+                lineHeight: 1.4,
+                maxWidth: "1040px",
+                opacity: 0.85,
+                display: "flex",
+                flexWrap: "wrap",
+              }}
+            >
+              {guide.metadata.description}
+            </div>
+          )}
         </div>
 
         {/* Bottom section with metadata */}
