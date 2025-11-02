@@ -11,6 +11,7 @@ A modern, interactive documentation and guide platform built with Next.js. mdgui
 - 📊 **Progress Tracking** - Automatically track user progress through guides with local storage
 - ✍️ **MDX Support** - Write guides in Markdown with full MDX support
 - 🎨 **Syntax Highlighting** - Beautiful code highlighting out of the box
+- 🖼️ **Dynamic OG Images** - Automatic Open Graph images for social media sharing
 - 📱 **Responsive Design** - Mobile-first design built with Tailwind CSS 4
 - 🌙 **Dark Mode** - Full dark mode support
 - 🤖 **LLM-Friendly** - Automatic llms.txt generation for AI/LLM consumption
@@ -162,6 +163,30 @@ When enabled, your llms.txt file will be available at `http://localhost:3000/llm
 - Tags and metadata
 - Step-by-step content (if enabled)
 - Table of contents with anchor links
+
+## 🖼️ Dynamic Open Graph Images
+
+mdguide automatically generates beautiful Open Graph images for social media sharing.
+
+### Features
+
+- **Automatic Generation**: Every guide gets a custom OG image at build time
+- **Social Media Optimized**: Perfect 1200x630px size for Twitter, Facebook, LinkedIn, etc.
+- **Dynamic Content**: Shows guide title, site name, author, and step count
+- **Beautiful Design**: Gradient background with professional typography
+- **Zero Configuration**: Works out of the box with no setup required
+
+### How It Works
+
+When you share a guide URL (e.g., `https://yoursite.com/getting-started`), social media platforms automatically fetch the custom OG image showing your guide's title and metadata.
+
+### Customization
+
+Want to customize the design? Edit **[app/[slug]/opengraph-image.tsx](app/[slug]/opengraph-image.tsx)** to:
+- Change colors and gradients
+- Adjust typography and layout
+- Add your logo or branding
+- Modify the visual style
 
 ## 🛠️ Development
 
