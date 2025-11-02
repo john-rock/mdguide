@@ -4,17 +4,24 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import type { Step } from "@/app/types/guide";
+import { GuideActionsMenu } from "./GuideActionsMenu";
 
 interface StepSectionProps {
   step: Step;
+  rawContent: string;
+  guideSlug: string;
+  isFirstStep?: boolean;
 }
 
-export function StepSection({ step }: StepSectionProps) {
+export function StepSection({ step, rawContent, guideSlug, isFirstStep = false }: StepSectionProps) {
   return (
     <section id={step.id} className="scroll-mt-20 mb-16">
-      <h2 className="mb-6 text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-        {step.title}
-      </h2>
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50">
+          {step.title}
+        </h2>
+        {!isFirstStep && <GuideActionsMenu rawContent={rawContent} guideSlug={guideSlug} />}
+      </div>
       <div className="prose prose-zinc dark:prose-invert max-w-none overflow-hidden">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}

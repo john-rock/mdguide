@@ -3,6 +3,7 @@
 import { GuideSidebar } from "./GuideSidebar";
 import { StepSection } from "./StepSection";
 import { CmdkSearchBar } from "./CmdkSearchBar";
+import { GuideActionsMenu } from "./GuideActionsMenu";
 import { useGuideProgress } from "@/app/hooks/useGuideProgress";
 import type { Guide, SearchResult } from "@/app/types/guide";
 
@@ -98,9 +99,12 @@ export function GuideContent({ guide }: GuideContentProps) {
           {/* Guide header - only show on first step */}
           {isFirstStep && (
             <header className="mb-12 border-b border-zinc-200 pb-8 dark:border-zinc-800">
-              <h1 className="mb-4 text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl">
-                {guide.metadata.title}
-              </h1>
+              <div className="mb-4 flex items-center justify-between gap-4">
+                <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl">
+                  {guide.metadata.title}
+                </h1>
+                <GuideActionsMenu rawContent={guide.rawContent} guideSlug={guide.slug} />
+              </div>
               {guide.metadata.description && (
                 <p className="text-xl leading-8 text-zinc-600 dark:text-zinc-400">
                   {guide.metadata.description}
@@ -131,7 +135,7 @@ export function GuideContent({ guide }: GuideContentProps) {
 
           {/* Current step */}
           <div className="min-h-[60vh]">
-            <StepSection step={currentStep} />
+            <StepSection step={currentStep} rawContent={guide.rawContent} guideSlug={guide.slug} isFirstStep={isFirstStep} />
           </div>
 
           {/* Step navigation */}
