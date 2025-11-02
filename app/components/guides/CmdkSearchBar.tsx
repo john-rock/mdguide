@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { createPortal } from "react-dom";
 import { Command } from "cmdk";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -42,7 +43,13 @@ export function CmdkSearchBar({ onSearch, showBackToHome = false, currentGuideSl
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [guides, setGuides] = useState<GuideListItem[]>([]);
   const [searchAllGuides, setSearchAllGuides] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
+
+  // Track if component is mounted (for portal)
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Toggle command menu with Cmd/Ctrl + K
   useEffect(() => {
@@ -154,36 +161,20 @@ export function CmdkSearchBar({ onSearch, showBackToHome = false, currentGuideSl
     setQuery(""); // Clear query to trigger re-search if needed
   };
 
-  return (
+  const dialogContent = mounted && open ? (
     <>
-      {/* Search trigger button */}
-      <button
-        onClick={() => setOpen(true)}
-        className="group relative w-full max-w-lg rounded-lg border border-zinc-300 bg-white px-4 py-2 pl-10 text-left text-sm text-zinc-500 hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-600"
-      >
-        <svg
-          className="absolute left-3 top-2.5 h-5 w-5 text-zinc-400"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <span>Search guides...</span>
-        <kbd className="pointer-events-none absolute right-3 top-2 hidden h-5 select-none items-center gap-1 rounded border border-zinc-200 bg-zinc-100 px-1.5 font-mono text-xs font-medium text-zinc-600 opacity-100 sm:flex dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
-          <span className="text-xs">⌘</span>K
-        </kbd>
-      </button>
+      {/* Backdrop overlay */}
+      <div
+        className="fixed inset-0 z-[100] bg-black/20 backdrop-blur-sm dark:bg-black/40"
+        onClick={() => setOpen(false)}
+      />
 
       {/* Command palette dialog */}
       <Command.Dialog
         open={open}
         onOpenChange={setOpen}
         label="Search guides"
-        className="fixed left-[50%] top-[20%] z-50 w-full max-w-lg translate-x-[-50%] overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-900"
+        className="fixed left-[50%] top-[20%] z-[101] w-full max-w-lg translate-x-[-50%] overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-900"
       >
         <VisuallyHidden.Root>
           <Dialog.Title>Search guides</Dialog.Title>
@@ -204,7 +195,7 @@ export function CmdkSearchBar({ onSearch, showBackToHome = false, currentGuideSl
           <Command.Input
             value={query}
             onValueChange={setQuery}
-            placeholder="Search guides..."
+            placeholder={currentGuideTitle ? `Search in ${currentGuideTitle}` : 'Search guides...'}
             className="w-full border-0 border-b border-zinc-200 bg-transparent px-4 py-3 pl-10 text-sm outline-none placeholder:text-zinc-500 dark:border-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-400"
           />
         </div>
@@ -385,14 +376,35 @@ export function CmdkSearchBar({ onSearch, showBackToHome = false, currentGuideSl
           )}
         </Command.List>
       </Command.Dialog>
+    </>
+  ) : null;
 
-      {/* Backdrop overlay */}
-      {open && (
-        <div
-          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm dark:bg-black/40"
-          onClick={() => setOpen(false)}
-        />
-      )}
+  return (
+    <>
+      {/* Search trigger button */}
+      <button
+        onClick={() => setOpen(true)}
+        className="group relative flex w-fit items-center gap-2 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-600 hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-600"
+      >
+        <svg
+          className="h-4 w-4 text-zinc-400"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <span>Search</span>
+        <kbd className="flex h-5 select-none items-center gap-1 rounded border border-zinc-200 bg-zinc-100 px-1.5 font-mono text-xs font-medium text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
+          <span className="text-xs">⌘</span>K
+        </kbd>
+      </button>
+
+      {/* Render dialog in portal at document body level */}
+      {mounted && dialogContent && createPortal(dialogContent, document.body)}
     </>
   );
 }

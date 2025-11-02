@@ -17,6 +17,8 @@ export interface GuideSidebarProps {
   highestCompletedStep: number;
   /** Callback when a step is selected */
   onStepChange: (index: number) => void;
+  /** Optional search bar component to render */
+  searchBar?: React.ReactNode;
 }
 
 /**
@@ -30,7 +32,7 @@ export interface GuideSidebarProps {
  *
  * @param props - Component props
  */
-export function GuideSidebar({ steps, title, currentStepIndex, highestCompletedStep, onStepChange }: GuideSidebarProps) {
+export function GuideSidebar({ steps, title, currentStepIndex, highestCompletedStep, onStepChange, searchBar }: GuideSidebarProps) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const handleStepClick = (index: number) => {
@@ -74,11 +76,17 @@ export function GuideSidebar({ steps, title, currentStepIndex, highestCompletedS
         `}
       >
         <div className="flex h-full flex-col overflow-y-auto px-4 py-8">
-          <div className="mb-8">
+          <div className="mb-6">
             <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
               {title}
             </h2>
           </div>
+
+          {searchBar && (
+            <div className="mb-6">
+              {searchBar}
+            </div>
+          )}
 
           <nav className="flex-1 space-y-1">
             {steps.map((step, index) => {

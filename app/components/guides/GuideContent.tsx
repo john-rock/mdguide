@@ -80,21 +80,20 @@ export function GuideContent({ guide }: GuideContentProps) {
         currentStepIndex={currentStepIndex}
         highestCompletedStep={highestCompletedStep}
         onStepChange={setCurrentStepIndex}
+        searchBar={
+          <CmdkSearchBar
+            onSearch={handleSearch}
+            showBackToHome={true}
+            currentGuideSlug={guide.slug}
+            currentGuideTitle={guide.metadata.title}
+            onStepSelect={setCurrentStepIndex}
+          />
+        }
       />
 
       {/* Main content */}
       <main className="flex-1">
         <div className="mx-auto max-w-4xl px-6 py-12 sm:px-8 lg:px-12">
-          {/* Search bar - always visible */}
-          <div className="mb-8">
-            <CmdkSearchBar
-              onSearch={handleSearch}
-              showBackToHome={true}
-              currentGuideSlug={guide.slug}
-              currentGuideTitle={guide.metadata.title}
-              onStepSelect={setCurrentStepIndex}
-            />
-          </div>
 
           {/* Guide header - only show on first step */}
           {isFirstStep && (
