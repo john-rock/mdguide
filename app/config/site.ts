@@ -7,7 +7,7 @@ export const siteConfig: SiteConfig = {
   },
   homepage: {
     title: 'Guides',
-    description: 'Step-by-step guides to help you get started and learn advanced features.',
+    description: 'Learn how to build, share, and manage your guides.',
   },
   footer: {
     text: 'Built with mdguide',
