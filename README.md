@@ -170,19 +170,40 @@ mdguide automatically generates beautiful Open Graph images for social media sha
 
 ### Features
 
-- **Automatic Generation**: Every guide gets a custom OG image at build time
+- **Automatic Generation**: Homepage and every guide get custom OG images at build time
 - **Social Media Optimized**: Perfect 1200x630px size for Twitter, Facebook, LinkedIn, etc.
 - **Dynamic Content**: Shows guide title, site name, author, and step count
 - **Beautiful Design**: Gradient background with professional typography
+- **Custom Image Support**: Option to use your own custom image for the homepage
 - **Zero Configuration**: Works out of the box with no setup required
 
 ### How It Works
 
-When you share a guide URL (e.g., `https://yoursite.com/getting-started`), social media platforms automatically fetch the custom OG image showing your guide's title and metadata.
+When you share a URL, social media platforms automatically fetch the custom OG image:
+- **Homepage** (`/`): Shows site title and description
+- **Guide pages** (`/guide-name`): Shows guide title, author, and metadata
+
+### Using a Custom Homepage Image
+
+Want to use your own custom OG image for the homepage?
+
+1. Place your image in the `public/` directory (e.g., `public/og-image.png`)
+2. Update **[app/config/site.ts](app/config/site.ts)**:
+   ```typescript
+   openGraph: {
+     homepageImage: '/og-image.png',
+   }
+   ```
+
+Guide pages will continue using dynamically generated images.
 
 ### Customization
 
-Want to customize the design? Edit **[app/[slug]/opengraph-image.tsx](app/[slug]/opengraph-image.tsx)** to:
+Want to customize the generated images?
+- **Homepage**: Edit **[app/opengraph-image.tsx](app/opengraph-image.tsx)**
+- **Guide pages**: Edit **[app/[slug]/opengraph-image.tsx](app/[slug]/opengraph-image.tsx)**
+
+You can:
 - Change colors and gradients
 - Adjust typography and layout
 - Add your logo or branding
@@ -211,8 +232,6 @@ npm run setup   # Run interactive setup wizard
 
 Planned features for future releases:
 
-- [ ] CLI generator (`npx create-mdguide`)
-- [ ] Guide templates and categories
 - [ ] Export guides to PDF
 - [ ] Multi-language support
 - [ ] Advanced search filters

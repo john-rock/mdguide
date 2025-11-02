@@ -16,4 +16,9 @@ export const siteConfig: SiteConfig = {
     enabled: true,
     includeStepContent: false,
   },
+  openGraph: {
+    // Leave undefined to use auto-generated OG image
+    // Or set to a custom image path like '/og-image.png'
+    homepageImage: undefined,
+  },
 };
