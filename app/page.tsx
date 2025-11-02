@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { CmdkSearchBar } from "@/app/components/guides/CmdkSearchBar";
 import { TagFilter } from "@/app/components/guides/TagFilter";
-import { Footer } from "@/app/components/Footer";
+import { Footer } from "@/app/components/layout/Footer";
 import type { GuideListItem, SearchResult } from "@/app/types/guide";
 import { siteConfig } from "@/app/config/site";
 

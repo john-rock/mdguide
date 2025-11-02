@@ -2,6 +2,14 @@
 
 import { useTheme } from "./ThemeProvider";
 
+/**
+ * DarkModeToggle button component
+ *
+ * A button that toggles between light and dark themes.
+ * Shows appropriate icon and label for the current theme state.
+ *
+ * @returns A button element with theme toggle functionality
+ */
 export function DarkModeToggle() {
   const { theme, toggleTheme } = useTheme();
 

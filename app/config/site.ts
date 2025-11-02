@@ -9,4 +9,11 @@ export const siteConfig: SiteConfig = {
     title: 'Guides',
     description: 'Step-by-step guides to help you get started and learn advanced features.',
   },
+  footer: {
+    text: 'Built with mdguide',
+  },
+  llmsTxt: {
+    enabled: true,
+    includeStepContent: false,
+  },
 };

@@ -2,12 +2,30 @@
 
 import { useState } from "react";
 
-interface TagFilterProps {
+/**
+ * Props for TagFilter component
+ */
+export interface TagFilterProps {
+  /** Array of all available tags */
   tags: string[];
+  /** Array of currently selected tags */
   selectedTags: string[];
+  /** Callback when selected tags change */
   onTagsChange: (tags: string[]) => void;
 }
 
+/**
+ * Tag filter component for filtering guides
+ *
+ * Displays a collapsible list of tag checkboxes to filter guide content.
+ * Features:
+ * - Toggle individual tags on/off
+ * - Clear all filters button
+ * - Collapsible panel
+ * - Badge showing selected tag count
+ *
+ * @param props - Component props
+ */
 export function TagFilter({ tags, selectedTags, onTagsChange }: TagFilterProps) {
   const [isExpanded, setIsExpanded] = useState(true);
 

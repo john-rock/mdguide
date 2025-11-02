@@ -3,14 +3,33 @@
 import { useState } from "react";
 import type { Step } from "@/app/types/guide";
 
-interface GuideSidebarProps {
+/**
+ * Props for GuideSidebar component
+ */
+export interface GuideSidebarProps {
+  /** Array of steps in the guide */
   steps: Step[];
+  /** Title of the guide */
   title: string;
+  /** Index of the currently active step */
   currentStepIndex: number;
+  /** Index of the highest completed step (for progress indication) */
   highestCompletedStep: number;
+  /** Callback when a step is selected */
   onStepChange: (index: number) => void;
 }
 
+/**
+ * Guide sidebar navigation component
+ *
+ * Displays a list of guide steps with:
+ * - Active step highlighting
+ * - Completion status indicators
+ * - Mobile-responsive drawer
+ * - Smooth scroll to top on step change
+ *
+ * @param props - Component props
+ */
 export function GuideSidebar({ steps, title, currentStepIndex, highestCompletedStep, onStepChange }: GuideSidebarProps) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 

@@ -13,6 +13,7 @@ A modern, interactive documentation and guide platform built with Next.js. mdgui
 - 🎨 **Syntax Highlighting** - Beautiful code highlighting out of the box
 - 📱 **Responsive Design** - Mobile-first design built with Tailwind CSS 4
 - 🌙 **Dark Mode** - Full dark mode support
+- 🤖 **LLM-Friendly** - Automatic llms.txt generation for AI/LLM consumption
 - 🔒 **Type-Safe** - Built with TypeScript for better developer experience
 - ⚡ **Fast & Modern** - Built on Next.js 16, React 19, and Tailwind CSS 4
 
@@ -131,6 +132,36 @@ Wrap up your guide!
 After creating your guide, it will be available at `http://localhost:3000/my-guide`
 
 See [SETUP.md](SETUP.md) for detailed guide creation instructions.
+
+## 🤖 llms.txt Support
+
+mdguide automatically generates an `llms.txt` file from your guides, making your documentation easily accessible to AI and LLM tools.
+
+### Configuration
+
+Enable or disable llms.txt in **[app/config/site.ts](app/config/site.ts)**:
+
+```typescript
+llmsTxt: {
+  enabled: true,              // Toggle llms.txt generation
+  includeStepContent: false,  // Include full content or just titles
+}
+```
+
+### Features
+
+- **Automatic Generation**: All published guides are included in `/llms.txt`
+- **Configurable**: Choose to include full step content or just titles
+- **Footer Link**: A link appears in the footer when enabled
+- **LLM-Optimized**: Follows the [llms.txt specification](https://llmstxt.org/)
+- **Static Generation**: Built at compile time for optimal performance
+
+When enabled, your llms.txt file will be available at `http://localhost:3000/llms.txt` and includes:
+- Guide titles and descriptions
+- Author and date information
+- Tags and metadata
+- Step-by-step content (if enabled)
+- Table of contents with anchor links
 
 ## 🛠️ Development
 

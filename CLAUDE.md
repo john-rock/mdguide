@@ -30,6 +30,10 @@ export const siteConfig: SiteConfig = {
     title: 'Guides',                  // Main heading on homepage
     description: 'Step-by-step...',   // Subheader on homepage
   },
+  llmsTxt: {
+    enabled: true,                    // Enable/disable llms.txt generation
+    includeStepContent: true,         // Include full step content in llms.txt
+  },
 };
 ```
 
@@ -144,6 +148,33 @@ Priority: URL hash takes precedence over localStorage on page load.
 - The homepage (`app/page.tsx`) displays the guide index
 - The guide index shows all published guides with search and tag filtering
 - The page title and description are controlled by `siteConfig.homepage` in `app/config/site.ts`
+
+### llms.txt Generation
+mdguide can automatically generate an `llms.txt` file from your guide content for LLM consumption:
+
+**Configuration** (`app/config/site.ts`):
+```typescript
+llmsTxt: {
+  enabled: true,              // Toggle llms.txt generation on/off
+  includeStepContent: true,   // Include full step content (true) or just titles (false)
+}
+```
+
+**Features**:
+- Accessible at `/llms.txt` route
+- Automatically includes all published guides with metadata and steps
+- Footer link appears when enabled
+- Follows the [llms.txt specification](https://llmstxt.org/)
+- Statically generated at build time
+- Includes table of contents with anchor links
+- Shows total guides and last updated date
+
+**Implementation**:
+- Generator: `app/lib/guides/llmsTxtGenerator.ts`
+- Route handler: `app/llms.txt/route.ts`
+- Footer integration: `app/components/layout/Footer.tsx`
+
+To disable the feature, set `llmsTxt.enabled` to `false` in `app/config/site.ts`.
 
 ## Tech Stack Notes
 

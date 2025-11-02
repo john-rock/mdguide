@@ -7,14 +7,34 @@ import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import * as Dialog from "@radix-ui/react-dialog";
 import type { SearchResult, GuideListItem } from "@/app/types/guide";
 
-interface CmdkSearchBarProps {
+/**
+ * Props for CmdkSearchBar component
+ */
+export interface CmdkSearchBarProps {
+  /** Async function to perform search and return results */
   onSearch: (query: string) => Promise<SearchResult[]>;
+  /** Whether to show "Back to Home" button */
   showBackToHome?: boolean;
+  /** Slug of the current guide (for within-guide navigation) */
   currentGuideSlug?: string;
+  /** Title of the current guide */
   currentGuideTitle?: string;
+  /** Callback when a step is selected (for within-guide navigation) */
   onStepSelect?: (stepIndex: number) => void;
 }
 
+/**
+ * Command palette search bar component
+ *
+ * Advanced search interface using cmdk library with:
+ * - Keyboard shortcut (Cmd/Ctrl+K) to open
+ * - Full-text search across guides and steps
+ * - Tag-based filtering
+ * - Navigation to guides and specific steps
+ * - "Back to Home" option when in a guide
+ *
+ * @param props - Component props
+ */
 export function CmdkSearchBar({ onSearch, showBackToHome = false, currentGuideSlug, currentGuideTitle, onStepSelect }: CmdkSearchBarProps) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");

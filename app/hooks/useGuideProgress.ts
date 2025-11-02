@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { STORAGE_KEYS } from "@/app/lib/constants";
 
 interface GuideProgress {
   [guideSlug: string]: {
@@ -8,8 +9,6 @@ interface GuideProgress {
     highestCompletedStep: number;
   };
 }
-
-const STORAGE_KEY = "mdguide-guide-progress";
 
 export function useGuideProgress(guideSlug: string, totalSteps: number) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -32,7 +31,7 @@ export function useGuideProgress(guideSlug: string, totalSteps: number) {
 
     // Load from localStorage
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(STORAGE_KEYS.GUIDE_PROGRESS);
       if (stored) {
         const progress: GuideProgress = JSON.parse(stored);
         const savedProgress = progress[guideSlug];
@@ -74,13 +73,13 @@ export function useGuideProgress(guideSlug: string, totalSteps: number) {
 
       // Save to localStorage
       try {
-        const stored = localStorage.getItem(STORAGE_KEY);
+        const stored = localStorage.getItem(STORAGE_KEYS.GUIDE_PROGRESS);
         const progress: GuideProgress = stored ? JSON.parse(stored) : {};
         progress[guideSlug] = {
           currentStep: currentStepIndex,
           highestCompletedStep: newHighestCompleted,
         };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+        localStorage.setItem(STORAGE_KEYS.GUIDE_PROGRESS, JSON.stringify(progress));
       } catch (error) {
         console.error("Failed to save guide progress:", error);
       }

@@ -6,10 +6,26 @@ import { CmdkSearchBar } from "./CmdkSearchBar";
 import { useGuideProgress } from "@/app/hooks/useGuideProgress";
 import type { Guide, SearchResult } from "@/app/types/guide";
 
-interface GuideContentProps {
+/**
+ * Props for GuideContent component
+ */
+export interface GuideContentProps {
+  /** The guide data to render */
   guide: Guide;
 }
 
+/**
+ * Main guide content component
+ *
+ * Renders a complete guide experience with:
+ * - Step-by-step navigation
+ * - Progress tracking with localStorage persistence
+ * - Sidebar with step list and progress indicators
+ * - Search functionality
+ * - Previous/Next navigation buttons
+ *
+ * @param props - Component props
+ */
 export function GuideContent({ guide }: GuideContentProps) {
   const { currentStepIndex, setCurrentStepIndex, highestCompletedStep, mounted } = useGuideProgress(
     guide.slug,
