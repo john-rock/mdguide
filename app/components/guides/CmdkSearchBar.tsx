@@ -9,14 +9,19 @@ import type { SearchResult, GuideListItem } from "@/app/types/guide";
 
 interface CmdkSearchBarProps {
   onSearch: (query: string) => Promise<SearchResult[]>;
+  showBackToHome?: boolean;
+  currentGuideSlug?: string;
+  currentGuideTitle?: string;
+  onStepSelect?: (stepIndex: number) => void;
 }
 
-export function CmdkSearchBar({ onSearch }: CmdkSearchBarProps) {
+export function CmdkSearchBar({ onSearch, showBackToHome = false, currentGuideSlug, currentGuideTitle, onStepSelect }: CmdkSearchBarProps) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [guides, setGuides] = useState<GuideListItem[]>([]);
+  const [searchAllGuides, setSearchAllGuides] = useState(false);
   const router = useRouter();
 
   // Toggle command menu with Cmd/Ctrl + K
@@ -63,23 +68,40 @@ export function CmdkSearchBar({ onSearch }: CmdkSearchBarProps) {
   useEffect(() => {
     if (query.trim()) {
       onSearch(query).then((searchResults) => {
-        setResults(searchResults);
+        // Filter results to current guide if we have a guide slug and not searching all
+        if (currentGuideSlug && !searchAllGuides) {
+          const filtered = searchResults.filter(result => result.slug === currentGuideSlug);
+          setResults(filtered);
+        } else {
+          setResults(searchResults);
+        }
       });
       setSelectedTag(null); // Clear tag selection when searching
     } else {
       setResults([]);
     }
-  }, [query, onSearch]);
+  }, [query, onSearch, currentGuideSlug, searchAllGuides]);
 
   const handleSelect = (result: SearchResult) => {
-    const url = result.stepIndex !== undefined
-      ? `/${result.slug}#step-${result.stepIndex + 1}`
-      : `/${result.slug}`;
-    router.push(url);
-    setOpen(false);
-    setQuery("");
-    setResults([]);
-    setSelectedTag(null);
+    // If we're on the same guide and have a step callback, use it for direct navigation
+    if (result.slug === currentGuideSlug && result.stepIndex !== undefined && onStepSelect) {
+      onStepSelect(result.stepIndex);
+      setOpen(false);
+      setQuery("");
+      setResults([]);
+      setSelectedTag(null);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // Otherwise, navigate to the new guide/page
+      const url = result.stepIndex !== undefined
+        ? `/${result.slug}#step-${result.stepIndex + 1}`
+        : `/${result.slug}`;
+      router.push(url);
+      setOpen(false);
+      setQuery("");
+      setResults([]);
+      setSelectedTag(null);
+    }
   };
 
   const handleTagSelect = (tag: string) => {
@@ -97,6 +119,19 @@ export function CmdkSearchBar({ onSearch }: CmdkSearchBarProps) {
   const handleBack = () => {
     setSelectedTag(null);
     setQuery("");
+  };
+
+  const handleBackToHome = () => {
+    router.push("/");
+    setOpen(false);
+    setQuery("");
+    setSelectedTag(null);
+    setSearchAllGuides(false);
+  };
+
+  const handleSearchAllGuides = () => {
+    setSearchAllGuides(true);
+    setQuery(""); // Clear query to trigger re-search if needed
   };
 
   return (
@@ -159,9 +194,55 @@ export function CmdkSearchBar({ onSearch }: CmdkSearchBarProps) {
             {query ? `No results found for "${query}"` : "No filters available"}
           </Command.Empty>
 
+          {/* Show navigation options when on a guide page */}
+          {showBackToHome && !query && !selectedTag && (
+            <Command.Group heading={currentGuideSlug && !searchAllGuides ? `Searching in "${currentGuideTitle}"` : undefined} className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:pt-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-zinc-500 dark:[&_[cmdk-group-heading]]:text-zinc-400">
+              <Command.Item
+                value="back-to-home"
+                onSelect={handleBackToHome}
+                className="mx-2 mb-1 flex cursor-pointer select-none items-center gap-2 rounded-md px-2 py-3 text-sm outline-none aria-selected:bg-zinc-100 dark:aria-selected:bg-zinc-800"
+              >
+                <svg
+                  className="h-4 w-4 text-zinc-600 dark:text-zinc-400"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span className="font-medium text-zinc-900 dark:text-zinc-100">Back to main page</span>
+              </Command.Item>
+              {currentGuideSlug && !searchAllGuides && (
+                <Command.Item
+                  value="search-all-guides"
+                  onSelect={handleSearchAllGuides}
+                  className="mx-2 mb-1 flex cursor-pointer select-none items-center gap-2 rounded-md px-2 py-3 text-sm outline-none aria-selected:bg-zinc-100 dark:aria-selected:bg-zinc-800"
+                >
+                  <svg
+                    className="h-4 w-4 text-zinc-600 dark:text-zinc-400"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                  <span className="font-medium text-zinc-900 dark:text-zinc-100">Search all guides</span>
+                </Command.Item>
+              )}
+            </Command.Group>
+          )}
+
           {/* Show search results when user has typed a query */}
           {query && results.length > 0 && (
-            <Command.Group heading="Guides" className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-zinc-500 dark:[&_[cmdk-group-heading]]:text-zinc-400">
+            <Command.Group
+              heading={currentGuideSlug && !searchAllGuides ? `Results in this guide` : "Results"}
+              className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-zinc-500 dark:[&_[cmdk-group-heading]]:text-zinc-400">
               {results.map((result, index) => (
                 <Command.Item
                   key={`${result.slug}-${result.stepId || index}`}

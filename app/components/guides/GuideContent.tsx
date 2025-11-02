@@ -2,8 +2,9 @@
 
 import { GuideSidebar } from "./GuideSidebar";
 import { StepSection } from "./StepSection";
+import { CmdkSearchBar } from "./CmdkSearchBar";
 import { useGuideProgress } from "@/app/hooks/useGuideProgress";
-import type { Guide } from "@/app/types/guide";
+import type { Guide, SearchResult } from "@/app/types/guide";
 
 interface GuideContentProps {
   guide: Guide;
@@ -41,6 +42,19 @@ export function GuideContent({ guide }: GuideContentProps) {
     }
   };
 
+  const handleSearch = async (query: string): Promise<SearchResult[]> => {
+    if (!query.trim()) return [];
+
+    try {
+      const response = await fetch(`/api/guides/search?q=${encodeURIComponent(query)}`);
+      if (!response.ok) return [];
+      return await response.json();
+    } catch (error) {
+      console.error("Search error:", error);
+      return [];
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-white dark:bg-black">
       {/* Sidebar */}
@@ -55,6 +69,17 @@ export function GuideContent({ guide }: GuideContentProps) {
       {/* Main content */}
       <main className="flex-1">
         <div className="mx-auto max-w-4xl px-6 py-12 sm:px-8 lg:px-12">
+          {/* Search bar - always visible */}
+          <div className="mb-8">
+            <CmdkSearchBar
+              onSearch={handleSearch}
+              showBackToHome={true}
+              currentGuideSlug={guide.slug}
+              currentGuideTitle={guide.metadata.title}
+              onStepSelect={setCurrentStepIndex}
+            />
+          </div>
+
           {/* Guide header - only show on first step */}
           {isFirstStep && (
             <header className="mb-12 border-b border-zinc-200 pb-8 dark:border-zinc-800">
